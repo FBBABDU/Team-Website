@@ -1,0 +1,395 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TOP-TEAM STUDIO — 3D Artists | Modeling • Animation • Rendering</title>
+  <meta name="description" content="TOP-TEAM STUDIO — Professional 3D artists for modeling, animation, rendering, and product design. Cinematic visuals for fashion, e-commerce, and tech." />
+  <meta property="og:title" content="TOP-TEAM STUDIO — 3D Artists" />
+  <meta property="og:description" content="Professional 3D modeling, animation, rendering, and product design." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/IMAGE/TOP-TEAM STUDIO.png" />
+  <link rel="icon" href="/IMAGE/TOP-TEAM STUDIO.png" />
+  <style>
+    :root{
+      --bg-deep:#0e1036; --bg-deeper:#0a0c2a; --accent:#75c1db; --text:#e8ecf1;
+      --muted:#9fb3c8; --card:#15184a; --card-2:#0f1340;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --ring: rgba(117,193,219,.55);
+      --radius:16px; --radius-lg:22px; --speed:260ms; --maxw:1200px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif;
+      background:
+        linear-gradient(180deg,#0b0d2b 0%, var(--bg-deep) 40%, var(--bg-deeper) 100%),
+        radial-gradient(1000px 600px at 85% -10%, rgba(117,193,219,.18), transparent 55%),
+        radial-gradient(900px 500px at -10% 30%, rgba(117,193,219,.12), transparent 50%);
+      min-height:100dvh; overflow-x:hidden;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+    .container{width:min(100% - 2rem, var(--maxw)); margin-inline:auto}
+
+    /* Announcement */
+    .announcement{position:relative;z-index:50;background:
+      linear-gradient(90deg, rgba(117,193,219,.15), transparent 60%), #0a0d34;
+      border-bottom:1px solid rgba(117,193,219,.2); text-align:center; padding:.9rem 1rem; font-size:.95rem}
+    .scroller{display:inline-block;white-space:nowrap;animation:ticker 18s linear infinite}
+    @keyframes ticker{from{transform:translateX(10%)} to{transform:translateX(-110%)}}
+
+    /* Header / Nav */
+    header{position:sticky;top:0;z-index:60;backdrop-filter:blur(8px);
+      background:rgba(9,12,45,.6); border-bottom:1px solid rgba(117,193,219,.15)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
+    .brand{display:flex;align-items:center;gap:.8rem}
+    .brand img{width:36px;height:36px;border-radius:10px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+    .brand .name{font-weight:800;letter-spacing:.3px}
+    .links{display:flex;align-items:center;gap:.2rem}
+    .links a,.links button{color:var(--text);font-weight:600;letter-spacing:.2px;padding:.55rem .8rem;border-radius:10px;border:0;background:transparent;cursor:pointer;transition:background var(--speed),transform var(--speed),color var(--speed)}
+    .links a:hover,.links button:hover{background:rgba(117,193,219,.12)}
+    .links a:focus-visible,.links button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+
+    .dropdown{position:relative}
+    .dropdown-menu{
+      position:absolute;top:110%;right:0;min-width:240px;padding:.6rem;border-radius:14px;
+      background:linear-gradient(180deg,var(--card) 0%, var(--card-2) 100%);
+      border:1px solid rgba(117,193,219,.18); box-shadow:var(--shadow);
+      display:grid;gap:.25rem;opacity:0;visibility:hidden;transform:translateY(-6px);
+      transition:opacity var(--speed),transform var(--speed),visibility var(--speed)}
+    .dropdown:hover .dropdown-menu,.dropdown:focus-within .dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+    .dropdown-menu a{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.65rem .7rem;border-radius:10px}
+    .dropdown-menu a:hover{background:rgba(117,193,219,.12)}
+
+    .burger{display:none;background:transparent;border:1px solid rgba(117,193,219,.3);padding:.55rem .7rem;border-radius:10px}
+    .burger svg{display:block}
+    .mobile-menu{display:none}
+    @media (max-width:900px){
+      .links{display:none}
+      .burger{display:inline-flex}
+      .mobile-menu{position:absolute;inset:calc(100% - 1px) 0 auto 0;background:rgba(9,12,45,.96);
+        border-bottom:1px solid rgba(117,193,219,.15);display:none;padding:.8rem 1rem 1.2rem}
+      .mobile-menu.open{display:block}
+      .mobile-menu a,.mobile-menu button{display:block;width:100%;text-align:left;margin:.2rem 0}
+      .mobile-menu .dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;background:transparent;border:0;box-shadow:none;padding:0}
+      .mobile-menu .dropdown-menu a{padding-left:1rem}
+    }
+
+    /* Sticky call-out */
+    .sticky-call{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);
+      bottom:24px;z-index:70;background:linear-gradient(180deg,#16205b,#0f1546);
+      color:var(--text);border:1px solid rgba(117,193,219,.25);box-shadow:var(--shadow);
+      padding:.8rem 1rem;border-radius:14px;display:flex;gap:.8rem;align-items:center;
+      opacity:0;pointer-events:none;transition:opacity .35s, transform .35s}
+    .sticky-call.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+    .sticky-call button{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:1.1rem}
+
+    /* Hero */
+    .hero{position:relative;padding:clamp(72px,9vw,120px) 0 72px;overflow:hidden}
+    .bg-orb{position:absolute;inset:-20% -10% auto auto;width:55vw;aspect-ratio:1/1;filter:blur(60px);
+      background:radial-gradient(circle at 50% 50%, rgba(117,193,219,.35), rgba(117,193,219,.07) 50%, transparent 65%);
+      animation:floaty 9s ease-in-out infinite alternate;pointer-events:none}
+    @keyframes floaty{from{transform:translateY(-12px)} to{transform:translateY(12px)}}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:clamp(18px,4vw,46px);align-items:center}
+    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.26em;text-transform:uppercase;font-size:.82rem}
+    .headline{font-size:clamp(2rem,4vw + .6rem,3.2rem);line-height:1.12;margin:.4rem 0 .6rem;font-weight:900}
+    .subhead{color:var(--muted);font-size:clamp(1rem,1.1vw + .8rem,1.2rem)}
+    .cta-row{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.1rem;border-radius:14px;
+      border:1px solid rgba(117,193,219,.25);
+      background:linear-gradient(180deg, rgba(117,193,219,.22), rgba(117,193,219,.12));
+      color:var(--text);font-weight:800;letter-spacing:.2px;text-decoration:none;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+      transition:transform var(--speed), background var(--speed), border-color var(--speed)}
+    .btn::after{content:"";position:absolute;inset:-200% -50% auto auto;width:160%;height:200%;
+      background:linear-gradient(120deg,transparent 40%, rgba(255,255,255,.18) 50%, transparent 60%);
+      transform:translate3d(-40%,-20%,0) rotate(12deg);opacity:0;transition:opacity var(--speed), transform var(--speed)}
+    .btn:hover{transform:translateY(-2px);background:linear-gradient(180deg, rgba(117,193,219,.28), rgba(117,193,219,.16));border-color:rgba(117,193,219,.55)}
+    .btn:hover::after{opacity:.9;transform:translate3d(10%,-10%,0) rotate(12deg)}
+    .btn-ghost{background:transparent;border-color:rgba(117,193,219,.25);font-weight:700}
+    .btn-ghost:hover{background:rgba(117,193,219,.12)}
+    .btn.pulse{animation:pulse 2.2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(117,193,219,.45)}50%{box-shadow:0 0 0 18px rgba(117,193,219,0)}}
+
+    .callout{margin-top:1.1rem;display:flex;align-items:center;gap:.7rem;background:rgba(117,193,219,.08);
+      border:1px solid rgba(117,193,219,.22);padding:.7rem .9rem;border-radius:12px;box-shadow:var(--shadow);animation:slideIn .9s cubic-bezier(.2,.9,.35,1) both}
+    @keyframes slideIn{from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)}}
+
+    .media-card{border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(180deg,var(--card) 0%, var(--card-2) 100%);
+      border:1px solid rgba(117,193,219,.22);box-shadow:var(--shadow);aspect-ratio:16/10;display:grid;place-items:center}
+    .media-inner{text-align:center;padding:1.2rem}
+    .media-inner p{color:var(--muted);margin-top:.4rem}
+
+    section{padding:clamp(56px,7vw,90px) 0}
+    .section-title{font-size:clamp(1.4rem,1.5vw + 1rem,2.2rem);margin:0 0 .8rem}
+    .section-sub{color:var(--muted);margin:0 0 1.2rem}
+
+    .grid{display:grid;gap:clamp(.8rem,1.3vw,1.2rem)}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.grid-3{grid-template-columns:1fr}}
+
+    .card{position:relative;border-radius:var(--radius);background:linear-gradient(180deg,var(--card) 0%, var(--card-2) 100%);
+      border:1px solid rgba(117,193,219,.18);padding:1.1rem 1rem;box-shadow:var(--shadow);
+      transition:transform var(--speed), border-color var(--speed), background var(--speed)}
+    .card:hover{transform:translateY(-4px) scale(1.01) rotateX(.4deg);border-color:rgba(117,193,219,.45);background:linear-gradient(180deg,#18205f 0%, #121851 100%)}
+    .card h3{margin:.2rem 0 .4rem}
+    .card ul{margin:.4rem 0 0 1rem;color:var(--muted)}
+
+    .logo-row{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;margin:.7rem 0}
+    .logo-row img{width:56px;height:56px;border-radius:12px;border:1px solid rgba(117,193,219,.2);background:#0b0d34;padding:6px}
+
+    .video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius-lg);overflow:hidden;border:1px solid rgba(117,193,219,.22);background:#0b0d34;box-shadow:var(--shadow)}
+    .video-wrap video{width:100%;height:100%;object-fit:cover}
+
+    .thumb{height:180px;border-radius:var(--radius);background:linear-gradient(120deg, rgba(117,193,219,.25), rgba(117,193,219,.06));
+      border:1px solid rgba(117,193,219,.2);display:grid;place-items:center;color:var(--muted);box-shadow:var(--shadow);transition:transform var(--speed)}
+    .thumb:hover{transform:translateY(-4px) scale(1.02)}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(117,193,219,.15);background:
+      linear-gradient(180deg,#0a0e3c 0%, #070a2e 100%)}
+    .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:1rem;padding:36px 0}
+    @media (max-width:900px){.footer-grid{grid-template-columns:1fr}}
+    .f-col h4{margin:.2rem 0 .5rem}
+    .f-col p,.f-col li,.f-col a{color:var(--muted)}
+    .f-links{list-style:none;padding:0;margin:.2rem 0}
+    .f-links li a{display:inline-block;padding:.2rem 0;position:relative}
+    .f-links li a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--accent);transition:width .25s}
+    .f-links li a:hover::after{width:100%}
+    .newsletter input{width:100%;padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(117,193,219,.25);background:#0c103a;color:var(--text);margin:.4rem 0}
+    .newsletter button{width:100%}
+    .bottom-bar{border-top:1px solid rgba(117,193,219,.15);padding:14px 0;text-align:center;color:var(--muted);font-size:.95rem}
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(16px)}
+    .reveal.in{opacity:1;transform:translateY(0);transition:opacity .7s ease, transform .7s ease}
+  </style>
+</head>
+<body>
+  <div class="announcement" role="status" aria-live="polite">
+    <span class="scroller">WELCOME TO TOP-TEAM STUDIO — Professional 3D Artists • Modeling • Animation • Rendering • Product Design</span>
+  </div>
+
+  <header aria-label="Main site header">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="/HTML/WEBPAGE.HTML
+      ">
+        <img src="/IMAGE/TOP-TEAM STUDIO.png" alt="TOP-TEAM STUDIO logo"/>
+        <span class="name">TOP-TEAM STUDIO</span>
+      </a>
+
+      <nav class="links" aria-label="Desktop">
+        <a href="/HTML/WEBPAGE.HTML">Home</a>
+        <div class="dropdown">
+          <button aria-expanded="false" aria-haspopup="true">Services ▾</button>
+          <div class="dropdown-menu" role="menu" aria-label="Services">
+            <a href="services.html#modeling" role="menuitem">3D Modeling <span>→</span></a>
+            <a href="services.html#animation" role="menuitem">3D Animation <span>→</span></a>
+            <a href="services.html#rendering" role="menuitem">Rendering <span>→</span></a>
+            <a href="services.html#product-design" role="menuitem">Product Design <span>→</span></a>
+            <a href="services.html#product-animation" role="menuitem">Product Animation <span>→</span></a>
+          </div>
+        </div>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn pulse" href="https://www.fiverr.com/s/m5rNZb9" rel="noopener" target="_blank">Join Now</a>
+      </nav>
+
+      <button class="burger" aria-label="Open menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+      <a href="/HTML/WEBPAGE.HTML">Home</a>
+      <details>
+        <summary>Services</summary>
+        <div class="dropdown-menu" role="menu">
+          <a href="services.html#modeling">3D Modeling</a>
+          <a href="services.html#animation">3D Animation</a>
+          <a href="services.html#rendering">Rendering</a>
+          <a href="services.html#product-design">Product Design</a>
+          <a href="services.html#product-animation">Product Animation</a>
+        </div>
+      </details>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="https://www.fiverr.com/s/m5rNZb9" rel="noopener" target="_blank">Join Now</a>
+    </div>
+  </header>
+
+  <div class="sticky-call" id="stickyCall">
+    <span>⚡ Limited slots this month — Start your project</span>
+    <a class="btn btn-ghost" href="contact.html">Get a Quote</a>
+    <button aria-label="Dismiss callout" id="callClose">×</button>
+  </div>
+
+  <main id="home" class="hero">
+    <div class="bg-orb" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow reveal">Professional 3D Artists</div>
+        <h1 class="headline reveal">Modeling, Animation & Rendering that move your brand</h1>
+        <p class="subhead reveal">We craft cinematic visuals: bags, shoes, apparel, characters, furniture, and high-impact product scenes.</p>
+        <p class="section-sub reveal">
+          We help fashion, e-commerce, and tech teams showcase products with cinematic clarity—fast iterations, clean topology, production-ready materials, and consistent lighting across campaigns.
+        </p>
+        <div class="cta-row reveal">
+          <a class="btn pulse" href="https://www.fiverr.com/s/m5rNZb9" rel="noopener" target="_blank">Join Now</a>
+          <a class="btn btn-ghost" href="#services">Explore Services</a>
+        </div>
+        <div class="callout reveal" role="note">
+          ⚡ Animated call-out: Limited slots available this month — secure your project start today.
+        </div>
+      </div>
+      <div class="hero-media reveal">
+        <div class="media-card">
+          <div class="media-inner">
+            <h3>Studio Preview</h3>
+            <p>High-quality holograms, product animation & photoreal rendering.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Services teaser -->
+  <section id="services" class="container">
+    <h2 class="section-title reveal">Our Services</h2>
+    <p class="section-sub reveal">Everything you need for world-class 3D content.</p>
+    <div class="grid grid-3">
+      <article class="card reveal">
+        <h3>3D Modeling</h3>
+        <p class="section-sub">Bags, shoes, apparel, character & furniture modeling.</p>
+        <a class="btn btn-ghost" href="services.html#modeling">Learn more →</a>
+      </article>
+      <article class="card reveal">
+        <h3>3D Animation</h3>
+        <p class="section-sub">Character, cloth, product spins & hero shots.</p>
+        <a class="btn btn-ghost" href="services.html#animation">Learn more →</a>
+      </article>
+      <article class="card reveal">
+        <h3>Rendering & Product Design</h3>
+        <p class="section-sub">Lighting, look-dev, hero renders & product animation.</p>
+        <a class="btn btn-ghost" href="services.html#rendering">Learn more →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- About teaser -->
+  <section class="container">
+    <h2 class="section-title reveal">About Us</h2>
+    <p class="section-sub reveal">A community of 3D artists helping brands and creators transform their businesses with high-end visuals.</p>
+    <div class="logo-row reveal">
+      <img src="/IMAGE/FHG.jpeg" alt="FHG brand mark" />
+      <img src="/IMAGE/TOP-TEAM STUDIO.png" alt="TOP-TEAM STUDIO mark" />
+    </div>
+    <div class="video-wrap reveal" width="360" height="240">
+      <video controls preload="metadata" poster="/IMAGE/TOP-TEAM STUDIO.png">
+        <source src="/IMAGE/Hailuo_Video_A cinematic 3D shot of a moder_426703128657985542.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </section>
+
+  <!-- Portfolio teaser -->
+  <section class="container">
+    <h2 class="section-title reveal">Portfolio</h2>
+    <p class="section-sub reveal">Select works — Full case studies coming soon.</p>
+    <div class="grid grid-3">
+      <div class="thumb reveal">Coming soon</div>
+      <div class="thumb reveal">Coming soon</div>
+      <div class="thumb reveal">Coming soon</div>
+    </div>
+    <div class="cta-row" style="margin-top:1.2rem">
+      <a class="btn btn-ghost" href="portfolio.html">View all →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="f-col">
+        <div class="brand" style="margin-bottom:.6rem">
+          <img src="/IMAGE/TOP-TEAM STUDIO.png" alt="TOP-TEAM STUDIO logo" />
+          <span class="name">TOP-TEAM STUDIO</span>
+        </div>
+        <p>Cinematic 3D modeling, animation & rendering for brands and creators.</p>
+        <p style="margin-top:.4rem">Industries: Fashion · E-commerce · Tech · Entertainment</p>
+      </div>
+      <div class="f-col">
+        <h4>Quick links</h4>
+        <ul class="f-links">
+          <li><a href="/HTML/WEBPAGE.HTML">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://www.fiverr.com/s/m5rNZb9" target="_blank" rel="noopener">Order on Fiverr</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Contact & newsletter</h4>
+        <p>Email: <a href="mailto:hello@topteamstudio.example">hello@topteamstudio.example</a></p>
+        <p>Location: Worldwide / Remote</p>
+        <form class="newsletter" onsubmit="event.preventDefault(); alert('Thanks! You are on the list.');">
+          <input type="text" name="n" placeholder="Your name" required>
+          <input type="email" name="e" placeholder="Your email" required>
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      © <span id="year"></span> TOP-TEAM STUDIO · Privacy · Terms · Cookies · ◎ ◎ ◎
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const burger = document.querySelector('.burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger?.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    // Dropdown aria update
+    document.querySelectorAll('.dropdown > button').forEach(btn => {
+      const menu = btn.nextElementSibling;
+      const set = (open)=>btn.setAttribute('aria-expanded', String(open));
+      btn.addEventListener('mouseenter',()=>set(true));
+      btn.addEventListener('mouseleave',()=>set(false));
+      btn.addEventListener('focus',()=>set(true));
+      btn.addEventListener('blur',()=>set(false));
+      menu?.addEventListener('mouseenter',()=>set(true));
+      menu?.addEventListener('mouseleave',()=>set(false));
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    }), {threshold:.1});
+    document.querySelectorAll('.reveal, .card, .thumb').forEach(el=>io.observe(el));
+
+    // Sticky call-out
+    const sticky = document.getElementById('stickyCall');
+    const closeBtn = document.getElementById('callClose');
+    const KEY = 'tt_sticky_dismissed';
+    function handleScroll(){
+      if(sessionStorage.getItem(KEY)==='1') return;
+      if(window.scrollY>400){ sticky.classList.add('show'); }
+    }
+    window.addEventListener('scroll', handleScroll, {passive:true});
+    closeBtn.addEventListener('click', ()=>{ sticky.classList.remove('show'); sessionStorage.setItem(KEY,'1'); });
+  </script>
+</body>
+</html>
